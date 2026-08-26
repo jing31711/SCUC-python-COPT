@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "unitcommitment"
+version = "0.1.0"
+description = "Python/COPT port of UnitCommitment.jl"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "coptpy",
+    "numpy",
+    "scipy",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

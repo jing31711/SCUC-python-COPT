@@ -1,0 +1,33 @@
+{
+  "Parameters": {
+    "Version": "0.5",
+    "Time horizon (h)": 2,
+    "Time step (min)": 60,
+    "Base MVA": 100,
+    "Power balance penalty ($/MW)": 1000
+  },
+  "Buses": {
+    "b1": {
+      "Load (MW)": [0, 80]
+    }
+  },
+  "Generators": {
+    "g1": {
+      "Type": "Thermal",
+      "Bus": "b1",
+      "Production cost curve (MW)": [0, 100],
+      "Production cost curve ($)": [0, 1000],
+      "Startup costs ($)": [0],
+      "Startup delays (h)": [0],
+      "Initial status (h)": 1,
+      "Initial power (MW)": 0,
+      "Minimum uptime (h)": 1,
+      "Minimum downtime (h)": 1,
+      "Ramp up limit (MW)": 30,
+      "Ramp down limit (MW)": 30,
+      "Startup limit (MW)": 100,
+      "Shutdown limit (MW)": 100,
+      "Commitment status": [true, true]
+    }
+  }
+}

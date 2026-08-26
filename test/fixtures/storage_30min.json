@@ -1,0 +1,41 @@
+{
+  "Parameters": {
+    "Version": "0.5",
+    "Time horizon (h)": 1,
+    "Time step (min)": 30,
+    "Base MVA": 100
+  },
+  "Buses": {
+    "b1": {
+      "Load (MW)": 0
+    }
+  },
+  "Generators": {
+    "g1": {
+      "Type": "Profiled",
+      "Bus": "b1",
+      "Minimum power (MW)": 10,
+      "Maximum power (MW)": 10,
+      "Cost ($/MW)": 0
+    }
+  },
+  "Storage units": {
+    "su1": {
+      "Bus": "b1",
+      "Minimum level (MWh)": 0,
+      "Maximum level (MWh)": 100,
+      "Charge cost ($/MW)": 0,
+      "Discharge cost ($/MW)": 0,
+      "Charge efficiency": 1,
+      "Discharge efficiency": 1,
+      "Loss factor": 0,
+      "Minimum charge rate (MW)": 0,
+      "Maximum charge rate (MW)": 20,
+      "Minimum discharge rate (MW)": 0,
+      "Maximum discharge rate (MW)": 20,
+      "Initial level (MWh)": 0,
+      "Last period minimum level (MWh)": 0,
+      "Last period maximum level (MWh)": 100
+    }
+  }
+}
