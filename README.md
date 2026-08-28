@@ -32,8 +32,8 @@ import unitcommitment as uc
 instance = uc.read("test/fixtures/case14/base.json")
 model = uc.build_model(instance)
 
-model.inner.solve()
-solution = uc.store_solution(model)
+model.optimize()
+solution = model.solution()
 uc.write("solution.json", solution)
 ```
 
@@ -41,6 +41,40 @@ uc.write("solution.json", solution)
 
 ```bash
 python -m pytest tests -q
+```
+
+## Run SCUC cases
+
+Install the package before running the scripts. Running `python scripts/run_scuc.py`
+does not add the project root to Python's import path.
+
+```bash
+python -m pip install -e .
+python scripts/run_scuc.py --input case57/2017-03-01.json.gz --solve --time-limit 300
+```
+
+For a long solve, use the background launcher. It redirects standard input and
+both output streams, so the process is detached from the terminal on macOS and
+Linux without requiring `setsid`.
+
+```bash
+scripts/run_scuc_background.sh --input case57/2017-03-01.json.gz --solve --time-limit 300
+scripts/scuc_status.sh PID data/scuc-runs/_logs/scuc-YYYYMMDD-HHMMSS.log
+```
+
+The COPT solver log is the portable source for row, column, and binary counts;
+the scripts deliberately do not query non-portable `coptpy` model statistics.
+Use MPS when an LP export is unnecessarily large:
+
+```bash
+python scripts/run_scuc.py --input case57/2017-03-01.json.gz --model-format mps
+```
+
+`solution.json` stores thermal series as objects keyed by unit name, rather
+than a list of units. Inspect it with:
+
+```bash
+python scripts/inspect_solution.py data/scuc-runs/RUN/solution.json --unit g1 --periods 36
 ```
 
 ## Notes

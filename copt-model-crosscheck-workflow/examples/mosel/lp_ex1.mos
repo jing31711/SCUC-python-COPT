@@ -1,0 +1,57 @@
+model "lp_ex1"
+  uses "nlsolv"
+
+  parameters
+    SOLVER="copt"
+    SOLVERPATH="coptampl"
+    SOLVEROPTIONS="logging 1"
+  end-parameters
+
+  declarations
+    x, y, z : mpvar           ! Decision variables 'x', 'y' and 'z'
+    c1, c2  : linctr          ! Constraints 'c1' and 'c2'
+    obj     : linctr          ! Objective function 'obj'
+  end-declarations
+
+  ! Set lower/upper bounds for variables
+  x >= 0.1
+  x <= 0.6
+  y >= 0.2
+  y <= 1.5
+  z >= 0.3
+  z <= 2.8
+
+  ! Constraint 'c1' and 'c2'
+  c1 := 1.5*x + 1.2*y + 1.8*z <= 2.6
+  c2 := 0.8*x + 0.6*y + 0.9*z >= 1.2
+
+  ! Objective function 'obj
+  obj := 1.2*x + 1.8*y + 2.1*z
+
+  ! Configuration of the solver
+  setparam("nl_verbose", true)
+  setparam("nl_solver", SOLVER)
+
+  if SOLVERPATH<>"" then
+    setparam("nl_solverpath", SOLVERPATH)
+  end-if
+
+  if SOLVEROPTIONS<>"" then
+    setparam("nl_options", SOLVEROPTIONS)
+  end-if
+
+  ! Solve the problem
+  maximize(obj)
+
+  ! Write solution
+  if getprobstat<>NL_OPT and getprobstat<>NL_UNF then
+    writeln("\nNo solution, optimization status: ", getparam("NL_STATUS"))
+  else
+    writeln("\nObjective value:", getobjval)
+
+    writeln("Variable solution")
+    writeln(" x = ", getsol(x))
+    writeln(" y = ", getsol(y))
+    writeln(" z = ", getsol(z))
+  end-if
+end-model

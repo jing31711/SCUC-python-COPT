@@ -1,0 +1,4 @@
+interface:
+  display_name: "SCUC UnitCommitment"
+  short_description: "Build and solve SCUC cases with Python unitcommitment and COPT/coptpy"
+  default_prompt: "Use $scuc-unitcommitment to build and solve an SCUC model with the Python unitcommitment package and COPT/coptpy."

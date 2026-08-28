@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>netcoreapp6.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="copt_dotnet20.dll">
+        <HintPath>$(COPT_HOME)/lib/copt_dotnet20.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
