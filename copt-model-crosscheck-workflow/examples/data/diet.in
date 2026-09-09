@@ -1,7 +1,0 @@
-#COPT script-in file
-
-read diet.mps
-set timelimit 10
-opt
-writesol diet
-quit
